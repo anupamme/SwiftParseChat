@@ -46,13 +46,8 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
                 // TODO: Add actiivtyIndicator
                 // self.activity.stopAnimating()
                 self.users1.removeAll(keepCapacity: false)
-<<<<<<< HEAD
                 if contacts != nil {
                     for contact in contacts as! [APContact]! {
-=======
-                if let contacts = contacts as? [APContact] {
-                    for contact in contacts {
->>>>>>> origin/master
                         self.users1.append(contact)
                     }
                     self.loadUsers()
@@ -109,13 +104,8 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
         var removeUsers = [APContact]()
         
         for user in users1 {
-<<<<<<< HEAD
-            if let userEmails = user.emails {
-                for email in userEmails as! [String] {
-=======
             if let userEmails = user.emails as? [String] {
                 for email in userEmails {
->>>>>>> origin/master
                     if email == removeEmail {
                         removeUsers.append(user)
                         break
@@ -157,8 +147,8 @@ class AddressBookViewController: UITableViewController, UIActionSheetDelegate, M
         }
         return nil
     }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+override     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         
         if indexPath.section == 0 {

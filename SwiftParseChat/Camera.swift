@@ -49,7 +49,6 @@ class Camera {
             cameraUI.delegate = target as! ChatViewController
         } else if target is ProfileViewController {
             cameraUI.delegate = target as! ProfileViewController
-<<<<<<< HEAD
         }
         target.presentViewController(cameraUI, animated: true, completion: nil)
         
@@ -94,8 +93,6 @@ class Camera {
             cameraUI.delegate = target as! ChatViewController
         } else if target is ProfileViewController {
             cameraUI.delegate = target as! ProfileViewController
-=======
->>>>>>> origin/master
         }
         target.presentViewController(cameraUI, animated: true, completion: nil)
         

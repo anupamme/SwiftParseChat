@@ -61,7 +61,6 @@ class WelcomeViewController: UIViewController {
         let url = NSURL(string: link)
         var request = NSURLRequest(URL: url!)
         let params = ["height": "200", "width": "200", "type": "square"]
-<<<<<<< HEAD
 //        Alamofire.request(.GET, link, parameters: params).response() {
 //            (request, response, data, error) in
 //            
@@ -113,59 +112,6 @@ class WelcomeViewController: UIViewController {
 //                }
 //            }
 //        }
-=======
-        Alamofire.request(.GET, link, parameters: params).response() {
-            (request, response, data, error) in
-            
-            if error == nil {
-                var image = UIImage(data: data! as! NSData)!
-                
-                if image.size.width > 280 {
-                    image = Images.resizeImage(image, width: 280, height: 280)!
-                }
-                var filePicture = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6))
-                filePicture.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
-                    if error != nil {
-                        ProgressHUD.showError("Error saving photo")
-                    }
-                })
-                
-                if image.size.width > 60 {
-                    image = Images.resizeImage(image, width: 60, height: 60)!
-                }
-                var fileThumbnail = PFFile(name: "thumbnail.jpg", data: UIImageJPEGRepresentation(image, 0.6))
-                fileThumbnail.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
-                    if error != nil {
-                        ProgressHUD.showError("Error saving thumbnail")
-                    }
-                })
-                
-                user[PF_USER_EMAILCOPY] = userData["email"]
-                user[PF_USER_FULLNAME] = userData["name"]
-                user[PF_USER_FULLNAME_LOWER] = (userData["name"] as! String).lowercaseString
-                user[PF_USER_FACEBOOKID] = userData["id"]
-                user[PF_USER_PICTURE] = filePicture
-                user[PF_USER_THUMBNAIL] = fileThumbnail
-                user.saveInBackgroundWithBlock({ (succeeded: Bool, error: NSError!) -> Void in
-                    if error == nil {
-                        self.userLoggedIn(user)
-                    } else {
-                        PFUser.logOut()
-                        if let info = error!.userInfo {
-                            ProgressHUD.showError("Login error")
-                            println(info["error"] as! String)
-                        }
-                    }
-                })
-            } else {
-                PFUser.logOut()
-                if let info = error!.userInfo {
-                    ProgressHUD.showError("Failed to fetch Facebook photo")
-                    println(info["error"] as! String)
-                }
-            }
-        }
->>>>>>> origin/master
     }
     
     func userLoggedIn(user: PFUser) {

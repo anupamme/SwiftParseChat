@@ -26,17 +26,23 @@ import AVFoundation
  
  protocol MMVoiceController {
     var voiceTransactionState: MMVoiceTransactionState {get}
-    var listener: MMListener! {get}
+    var listener: SuperListener! {get}
     var speakButton: MMMicrophoneButton {get}
     var currentText: String {get}
     
     var mindMeldApp: MMApp {get}
  }
  
+ class SuperListener: MMListener {
+    override func startListening() {
+        super.startListening()
+    }
+ }
+ 
 class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, MMVoiceController {
     
     var voiceTransactionState: MMVoiceTransactionState
-    var listener: MMListener! = nil
+    var listener: SuperListener! = nil
     var speakButton: MMMicrophoneButton = MMMicrophoneButton()
     var mindMeldApp: MMApp = MMApp()
     var currentText: String
@@ -247,15 +253,9 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
             query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                 if error == nil {
                     self.automaticallyScrollsToMostRecentMessage = false
-<<<<<<< HEAD
                     
                     for object in (objects as! [PFObject]!).reverse() {
-                        
                         self.addMessage(object, localUrl: nil)
-=======
-                    for object in (objects as! [PFObject]!).reverse() {
-                        self.addMessage(object)
->>>>>>> origin/master
                     }
                     if objects.count > 0 {
                         self.finishReceivingMessage()
