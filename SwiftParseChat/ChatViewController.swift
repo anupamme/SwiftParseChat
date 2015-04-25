@@ -37,6 +37,10 @@ import AVFoundation
     override func startListening() {
         super.startListening()
     }
+    
+    override init() {
+      super.init()
+    }
  }
  
 class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, MMVoiceController {
@@ -158,12 +162,8 @@ class ChatViewController: JSQMessagesViewController, UICollectionViewDataSource,
 //        }
     }
     
-    func eventListener(){
-        // do nothing.
-    }
-    
     func createListener(){
-        self.listener = MMListener()
+        self.listener = SuperListener()
         self.listener.continuous = true; // continuous speech recognition
         self.listener.interimResults = true;
         self.listener.language = "en-US"
